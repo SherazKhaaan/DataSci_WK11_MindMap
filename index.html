@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Streams & Streaming Algorithms Mind Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f8f9fa;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mindmap {
+      position: relative;
+      width: 1000px;
+      height: 700px;
+      margin: 20px 0;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .node {
+      position: absolute;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .node:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .red {
+      background-color: #ffcccc;
+      border: 2px solid #e60000;
+      color: #990000;
+    }
+    .blue {
+      background-color: #cce5ff;
+      border: 2px solid #0066cc;
+      color: #004080;
+    }
+    .green {
+      background-color: #ccffcc;
+      border: 2px solid #00cc00;
+      color: #006600;
+    }
+    #infoPanel {
+      width: 1000px;
+      min-height: 150px;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .infoTitle {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .infoContent {
+      line-height: 1.5;
+    }
+    line {
+      stroke: #999;
+      stroke-width: 2;
+    }
+    .legend {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .legendItem {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legendBox {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Data Streams & Streaming Algorithms</h1>
+    <div class="mindmap" id="mindmap">
+      <!-- SVG lines for connections -->
+      <svg width="1000" height="700" style="position: absolute; top: 0; left: 0;">
+        <!-- main center node connections -->
+        <line x1="500" y1="350" x2="250" y2="200" />
+        <line x1="500" y1="350" x2="750" y2="200" />
+        <line x1="500" y1="350" x2="250" y2="500" />
+        <line x1="500" y1="350" x2="750" y2="500" />
+      </svg>
+
+      <!-- Main Node: Data Streams -->
+      <div class="node red" style="width: 180px; top: 330px; left: 410px;"
+           onclick="showInfo('Data Streams',
+           '<ul><li>Continuous, potentially infinite flow of data.</li><li>Need real-time, sub-linear memory solutions.</li></ul>')">
+        Data Streams
+      </div>
+
+      <!-- Top-left: Bloom Filters -->
+      <div class="node blue" style="width: 140px; top: 170px; left: 160px;"
+           onclick="showInfo('Bloom Filters',
+           '<ul><li>Probabilistic membership test.</li><li>False positives possible; no false negatives.</li><li>Requires k hash functions & a bit array.</li></ul>')">
+        Bloom Filters
+      </div>
+
+      <!-- Top-right: Counting Distinct (FM) -->
+      <div class="node blue" style="width: 140px; top: 170px; left: 660px;"
+           onclick="showInfo('Flajolet-Martin (FM)',
+           '<ul><li>Estimates number of distinct elements in a stream.</li><li>Counts trailing zeros in hash outputs.</li><li>Uses multiple hashes & averaging for accuracy.</li></ul>')">
+        Flajolet-Martin
+      </div>
+
+      <!-- Bottom-left: Sliding Window / older topics (optional) -->
+      <div class="node blue" style="width: 140px; top: 470px; left: 160px;"
+           onclick="showInfo('Other Stream Models',
+           '<ul><li>Sliding Windows: keep stats on last N items.</li><li>Sampling: Reservoir & Weighted sampling.</li><li>DGIM for approximate counts in a window.</li></ul>')">
+        Other Stream Models
+      </div>
+
+      <!-- Bottom-right: AMS for Frequency Moments -->
+      <div class="node blue" style="width: 140px; top: 470px; left: 660px;"
+           onclick="showInfo('AMS Method',
+           '<ul><li>Alon-Matias-Szegedy for frequency moments.</li><li>Unbiased estimate of F2 (and beyond).</li><li>Combines random position selection & counting.</li></ul>')">
+        AMS Method
+      </div>
+    </div>
+
+    <div id="infoPanel">
+      <div class="infoTitle" id="infoTitle">Click on a concept to see details</div>
+      <div class="infoContent" id="infoContent">
+        Select any node in the mind map to display detailed information about that concept.
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legendItem">
+        <div class="legendBox red"></div>
+        <span>Main Topic</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox blue"></div>
+        <span>Key Algorithms</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showInfo(title, content) {
+      document.getElementById("infoPanel").style.display = "block";
+      document.getElementById("infoTitle").textContent = title;
+      document.getElementById("infoContent").innerHTML = content;
+    }
+  </script>
+</body>
+</html>
